@@ -59,9 +59,9 @@ public class SeaGrid : ISeaGrid
 	/// <param name="x">x coordinate of the tile</param>
 	/// <param name="y">y coordiante of the tile</param>
 	/// <returns></returns>
-	public TileView this[int x, int y]
+	public TileView Item(int x, int y)
 	{
-		get { return _GameTiles[x, y].View; }
+		return _GameTiles[x, y].View;
 	}
 
 	/// <summary>
