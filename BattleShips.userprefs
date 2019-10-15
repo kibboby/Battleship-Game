@@ -22,19 +22,6 @@
       <File FileName="src\Model\AIHardPlayer.cs" Line="351" Column="116" />
       <File FileName="src\Model\AIMediumPlayer.cs" Line="116" Column="115" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="BattleShips" expanded="True">
-            <Node name="BattleShips" expanded="True">
-              <Node name="src" expanded="True">
-                <Node name="UtilityFunctions.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.BattleShips PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
