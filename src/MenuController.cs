@@ -27,6 +27,7 @@ static class MenuController
 			"PLAY",
 			"SETUP",
 			"SCORES",
+			"MUTE",
 			"QUIT"
 		},
 		new string[] {
@@ -57,7 +58,10 @@ static class MenuController
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
 
-	private const int MAIN_MENU_QUIT_BUTTON = 3;
+	private const int MUTE_MENU = 3;
+	private const int MAIN_MENU_MUTE_BUTTON = 3;
+
+	private const int MAIN_MENU_QUIT_BUTTON = 4;
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 	private const int SETUP_MENU_HARD_BUTTON = 2;
@@ -192,24 +196,34 @@ static class MenuController
 	/// of the menu, to enable sub menus. The xOffset repositions the menu horizontally
 	/// to allow the submenus to be positioned correctly.
 	/// </remarks>
-	private static void DrawButtons(int menu, int level, int xOffset)
+	private static void DrawButtons (int menu, int level, int xOffset)
 	{
 		int btnTop = 0;
 
 		btnTop = MENU_TOP - (MENU_GAP + BUTTON_HEIGHT) * level;
 		int i = 0;
-		for (i = 0; i <= _menuStructure[menu].Length - 1; i++) {
+		for (i = 0; i <= _menuStructure [menu].Length - 1; i++) {
 			int btnLeft = 0;
 			btnLeft = MENU_LEFT + BUTTON_SEP * (i + xOffset);
 			//SwinGame.FillRectangle(Color.White, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT)
-			SwinGame.DrawTextLines(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, btnLeft + TEXT_OFFSET, btnTop + TEXT_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT);
+			SwinGame.DrawTextLines (_menuStructure [menu] [i], MENU_COLOR, Color.Black, GameResources.GameFont ("Menu"), FontAlignment.AlignCenter, btnLeft + TEXT_OFFSET, btnTop + TEXT_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-			if (SwinGame.MouseDown(MouseButton.LeftButton) & IsMouseOverMenu(i, level, xOffset)) {
-				SwinGame.DrawRectangle(HIGHLIGHT_COLOR, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+			if (SwinGame.MouseDown (MouseButton.LeftButton) & IsMouseOverMenu (i, level, xOffset)) {
+				SwinGame.DrawRectangle (HIGHLIGHT_COLOR, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+			}
+		}
+
+		for (int a = 0; a < _menuStructure [menu].Length; a++) {
+			string btnText = _menuStructure [menu] [a];
+			int btnLeft = MENU_LEFT + BUTTON_SEP * (a + xOffset);
+			float x = btnLeft + TEXT_OFFSET;
+			float y = btnTop + TEXT_OFFSET;
+
+			if (GameResources.Muted && a == MAIN_MENU_MUTE_BUTTON) {
+				btnText = "UNMUTED";
 			}
 		}
 	}
-
 	/// <summary>
 	/// Determined if the mouse is over one of the button in the main menu.
 	/// </summary>
@@ -252,6 +266,9 @@ static class MenuController
 			case GAME_MENU:
 				PerformGameMenuAction(button);
 				break;
+			case MAIN_MENU_MUTE_BUTTON:
+				GameResources.MuteButtonPressed ();
+				break;
 		}
 	}
 
@@ -271,6 +288,9 @@ static class MenuController
 			case MAIN_MENU_TOP_SCORES_BUTTON:
 				GameController.AddNewState(GameState.ViewingHighScores);
 				break;
+			case MAIN_MENU_MUTE_BUTTON:
+				GameResources.MuteButtonPressed ();
+				break;
 			case MAIN_MENU_QUIT_BUTTON:
 				GameController.EndCurrentState();
 				break;
@@ -285,10 +305,10 @@ static class MenuController
 	{
 		switch (button) {
 			case SETUP_MENU_EASY_BUTTON:
-				GameController.SetDifficulty(AIOption.Hard);
+				GameController.SetDifficulty(AIOption.Easy);
 				break;
 			case SETUP_MENU_MEDIUM_BUTTON:
-				GameController.SetDifficulty(AIOption.Hard);
+				GameController.SetDifficulty(AIOption.Medium);
 				break;
 			case SETUP_MENU_HARD_BUTTON:
 				GameController.SetDifficulty(AIOption.Hard);
