@@ -3,31 +3,31 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-// using System.Data;
+//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
 static class GameLogic
 {
-	public static void Main()
+	public static void Main ()
 	{
 		//Opens a new Graphics Window
-		SwinGame.OpenGraphicsWindow("Battle Ships", 800, 600);
+		SwinGame.OpenGraphicsWindow ("Battle Ships", 800, 600);
 
 		//Load Resources
-		GameResources.LoadResources();
+		GameResources.LoadResources ();
 
-		SwinGame.PlayMusic(GameResources.GameMusic("new"));
+		SwinGame.PlayMusic (GameResources.GameMusic ("new"));
 
 		//Game Loop
 		do {
-			GameController.HandleUserInput();
-			GameController.DrawScreen();
-		} while (!(SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting));
+			GameController.HandleUserInput ();
+			GameController.DrawScreen ();
+		} while (!(SwinGame.WindowCloseRequested () == true | GameController.CurrentState == GameState.Quitting));
 
-		SwinGame.StopMusic();
+		SwinGame.StopMusic ();
 
 		//Free Resources and Close Audio, to end the program.
-		GameResources.FreeResources();
+		GameResources.FreeResources ();
 	}
 }
 

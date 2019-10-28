@@ -39,6 +39,9 @@ static class MenuController
 			"EASY",
 			"MEDIUM",
 			"HARD"
+		},
+		new string[]{
+			"RETURN"
 		}
 
 	};
@@ -48,28 +51,28 @@ static class MenuController
 	private const int BUTTON_WIDTH = 75;
 	private const int BUTTON_HEIGHT = 15;
 	private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
+	//new back button to return to main page
+	private const int RETURN_LEFT = 5;
 
 	private const int TEXT_OFFSET = 0;
 	private const int MAIN_MENU = 0;
 	private const int GAME_MENU = 1;
-
 	private const int SETUP_MENU = 2;
+
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
-
 	private const int MUTE_MENU = 3;
 	private const int MAIN_MENU_MUTE_BUTTON = 3;
-
 	private const int MAIN_MENU_QUIT_BUTTON = 4;
+
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 	private const int SETUP_MENU_HARD_BUTTON = 2;
-
 	private const int SETUP_MENU_EXIT_BUTTON = 3;
+
 	private const int GAME_MENU_RETURN_BUTTON = 0;
 	private const int GAME_MENU_SURRENDER_BUTTON = 1;
-
 	private const int GAME_MENU_QUIT_BUTTON = 2;
 	private static readonly Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
 
@@ -105,6 +108,13 @@ static class MenuController
 	{
 		HandleMenuInput(GAME_MENU, 0, 0);
 	}
+
+	public static void HandleBackMenuInput ()
+	{
+		HandleMenuInput (RETURN_LEFT, 0, 0);
+	}
+
+
 
 	/// <summary>
 	/// Handles input for the specified menu.
@@ -183,6 +193,11 @@ static class MenuController
 	private static void DrawButtons(int menu)
 	{
 		DrawButtons(menu, 0, 0);
+	}
+
+	public static void DrawReturnMenuButton ()
+	{
+		DrawButtons (RETURN_LEFT);
 	}
 
 	/// <summary>
@@ -269,7 +284,16 @@ static class MenuController
 			case MAIN_MENU_MUTE_BUTTON:
 				GameResources.MuteButtonPressed ();
 				break;
+			case RETURN_LEFT:
+				PerformBackMenuAction (button);
+			break;
 		}
+	}
+
+	//handle user input to go to the main page
+	public static void PerformBackMenuAction (int b)
+	{
+		GameController.EndCurrentState ();
 	}
 
 	/// <summary>
