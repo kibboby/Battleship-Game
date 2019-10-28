@@ -43,6 +43,9 @@ public static class GameResources
 		NewImage("Menu", "main_page.jpg");
 		NewImage("Discovery", "discover.jpg");
 		NewImage("Deploy", "deploy.jpg");
+		
+		//New Background
+		NewImage ("a1", "a1.jpg");
 
 		//Deployment
 		NewImage("LeftRightButton", "deploy_dir_button_horiz.png");
@@ -78,6 +81,9 @@ public static class GameResources
 	private static void LoadMusic()
 	{
 		NewMusic("Background", "horrordrone.mp3");
+
+		//New background music
+		NewMusic ("new", "Battleship.ogg");
 	}
 
 	/// <summary>
