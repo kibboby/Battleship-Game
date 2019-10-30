@@ -47,7 +47,8 @@ static class DeploymentController
 	/// </remarks>
 	public static void HandleDeploymentInput()
 	{
-		if (SwinGame.KeyTyped(SwinGameSDK.KeyCode.vk_SPACE)) {
+		MenuController.HandleBackMenuInput();
+		if (SwinGame.KeyTyped(SwinGameSDK.KeyCode.vk_ESCAPE)) {
 			GameController.AddNewState(GameState.ViewingGameMenu);
 		}
 
@@ -64,7 +65,7 @@ static class DeploymentController
 
 		if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
 			ShipName selected = default(ShipName);
-			selected = GetShipMouseIsOver();
+			selected = GetShipMouseIsOver ();
 			if (selected != ShipName.None) {
 				_selectedShip = selected;
 			} else {

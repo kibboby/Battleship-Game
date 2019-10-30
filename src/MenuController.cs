@@ -1,9 +1,8 @@
-
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-// using System.Data;
+//using System.Data;
 using System.Diagnostics;
 using SwinGameSDK;
 
@@ -16,6 +15,14 @@ using SwinGameSDK;
 static class MenuController
 {
 
+	private const int MENU_TOP = 575;
+	private const int MENU_LEFT = 30;
+	private const int MENU_GAP = 0;
+	private const int BUTTON_WIDTH = 90;
+	private const int BUTTON_HEIGHT = 15;
+	private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
+	private const int TEXT_OFFSET = 0;
+
 	/// <summary>
 	/// The menu structure for the game.
 	/// </summary>
@@ -25,7 +32,7 @@ static class MenuController
 	private static readonly string[][] _menuStructure = {
 		new string[] {
 			"PLAY",
-			"SETUP",
+			"DIFFICULTY",
 			"SCORES",
 			"MUTE",
 			"QUIT"
@@ -40,29 +47,21 @@ static class MenuController
 			"MEDIUM",
 			"HARD"
 		},
-		new string[]{
-			"RETURN"
-		}
+		new string[] {
+			"BACK"
+		},
 
 	};
-	private const int MENU_TOP = 575;
-	private const int MENU_LEFT = 30;
-	private const int MENU_GAP = 0;
-	private const int BUTTON_WIDTH = 75;
-	private const int BUTTON_HEIGHT = 15;
-	private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
-	//new back button to return to main page
-	private const int RETURN_LEFT = 5;
 
-	private const int TEXT_OFFSET = 0;
 	private const int MAIN_MENU = 0;
 	private const int GAME_MENU = 1;
 	private const int SETUP_MENU = 2;
+	private const int BACK_MENU = 3;
+	private const int MUTE_MENU = 4;
 
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
-	private const int MUTE_MENU = 3;
 	private const int MAIN_MENU_MUTE_BUTTON = 3;
 	private const int MAIN_MENU_QUIT_BUTTON = 4;
 
@@ -74,6 +73,7 @@ static class MenuController
 	private const int GAME_MENU_RETURN_BUTTON = 0;
 	private const int GAME_MENU_SURRENDER_BUTTON = 1;
 	private const int GAME_MENU_QUIT_BUTTON = 2;
+
 	private static readonly Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
 
 	private static readonly Color HIGHLIGHT_COLOR = SwinGame.RGBAColor(1, 57, 86, 255);
@@ -111,7 +111,7 @@ static class MenuController
 
 	public static void HandleBackMenuInput ()
 	{
-		HandleMenuInput (RETURN_LEFT, 0, 0);
+		HandleMenuInput (BACK_MENU, 0, 0);
 	}
 
 
@@ -186,6 +186,11 @@ static class MenuController
 		DrawButtons(SETUP_MENU, 1, 1);
 	}
 
+	public static void DrawBackMenuButton ()
+	{
+		DrawButtons (BACK_MENU);
+	}
+
 	/// <summary>
 	/// Draw the buttons associated with a top level menu.
 	/// </summary>
@@ -193,11 +198,6 @@ static class MenuController
 	private static void DrawButtons(int menu)
 	{
 		DrawButtons(menu, 0, 0);
-	}
-
-	public static void DrawReturnMenuButton ()
-	{
-		DrawButtons (RETURN_LEFT);
 	}
 
 	/// <summary>
@@ -233,9 +233,29 @@ static class MenuController
 			int btnLeft = MENU_LEFT + BUTTON_SEP * (a + xOffset);
 			float x = btnLeft + TEXT_OFFSET;
 			float y = btnTop + TEXT_OFFSET;
+			int w = BUTTON_WIDTH;
+			int h = BUTTON_HEIGHT;
 
 			if (GameResources.Muted && a == MAIN_MENU_MUTE_BUTTON) {
 				btnText = "UNMUTED";
+			}
+
+			if (IsMouseOverMenu (a, level, xOffset)) {
+				const int numExpandFrames = 9; // 9 would gives us 0 1 2 3 4 3 2 1 0 (when we're done setting up "expExt") 
+				int expExt = (int)(GameController.HighlightTimer.Ticks / 66) % numExpandFrames; // expansion extent (num of pixels outward from normal size) 
+				if (expExt > numExpandFrames / 2) {
+					expExt = (numExpandFrames - 1) - expExt;
+				}
+
+				SwinGame.DrawTextLines (btnText, Color.Yellow, Color.Black, GameResources.GameFont ("Menu"),
+					FontAlignment.AlignCenter, x, y - expExt / 2 + expExt, w, h + expExt * 2);
+
+				if (SwinGame.MouseDown (MouseButton.LeftButton)) {
+					SwinGame.DrawRectangle (HIGHLIGHT_COLOR, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
+				}
+			} else {
+				SwinGame.DrawTextLines (btnText, MENU_COLOR, Color.Black, GameResources.GameFont ("Menu"),
+					FontAlignment.AlignCenter, x, y, w, h);
 			}
 		}
 	}
@@ -281,20 +301,17 @@ static class MenuController
 			case GAME_MENU:
 				PerformGameMenuAction(button);
 				break;
-			case MAIN_MENU_MUTE_BUTTON:
+			case MUTE_MENU:
 				GameResources.MuteButtonPressed ();
 				break;
-			case RETURN_LEFT:
+			case BACK_MENU:
 				PerformBackMenuAction (button);
-			break;
+				break;
+
 		}
 	}
 
-	//handle user input to go to the main page
-	public static void PerformBackMenuAction (int b)
-	{
-		GameController.EndCurrentState ();
-	}
+
 
 	/// <summary>
 	/// The main menu was clicked, perform the button's action.
@@ -362,6 +379,12 @@ static class MenuController
 				GameController.AddNewState(GameState.Quitting);
 				break;
 		}
+	}
+
+	//handle user input to go to the main page
+	public static void PerformBackMenuAction (int button)
+	{
+		GameController.EndCurrentState ();
 	}
 }
 

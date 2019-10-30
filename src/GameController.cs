@@ -14,7 +14,8 @@ using SwinGameSDK;
 /// </summary>
 public static class GameController
 {
-
+	public static Timer timer = SwinGame.CreateTimer ();
+	public static Timer HighlightTimer = SwinGame.CreateTimer ();
 	private static BattleShipsGame _theGame;
 	private static Player _human;
 
@@ -42,6 +43,15 @@ public static class GameController
 		get { return _human; }
 	}
 
+	/// <summary>
+	/// Gets the timer.
+	/// </summary>
+	/// <value>The timer.</value>
+	public static Timer TIMER {
+		get {
+			return timer;
+		}
+	}
 	/// <summary>
 	/// Returns the computer player.
 	/// </summary>
@@ -274,7 +284,7 @@ public static class GameController
 	public static void HandleUserInput()
 	{
 		//Read incoming input events
-		SwinGame.ProcessEvents();
+		SwinGame.ProcessEvents ();
 
 		switch (CurrentState) {
 			case GameState.ViewingMainMenu:
@@ -287,7 +297,7 @@ public static class GameController
 				MenuController.HandleSetupMenuInput();
 				break;
 			case GameState.Deploying:
-				DeploymentController.HandleDeploymentInput();
+				DeploymentController.HandleDeploymentInput ();
 				break;
 			case GameState.Discovering:
 				DiscoveryController.HandleDiscoveryInput();
@@ -324,9 +334,14 @@ public static class GameController
 				MenuController.DrawSettings();
 				break;
 			case GameState.Deploying:
-				DeploymentController.DrawDeployment();
+				SwinGame.StopTimer (TIMER);
+				DeploymentController.DrawDeployment ();
+				MenuController.DrawBackMenuButton ();
 				break;
 			case GameState.Discovering:
+				if (SwinGame.TimerTicks (TIMER) == 0) {
+				SwinGame.StartTimer (TIMER);
+				}
 				DiscoveryController.DrawDiscovery();
 				break;
 			case GameState.EndingGame:
@@ -340,6 +355,37 @@ public static class GameController
 		UtilityFunctions.DrawAnimations();
 
 		SwinGame.RefreshScreen();
+	}
+
+	/// <summary>
+	/// Countdown this instance.
+	/// </summary>
+	public static string Countdown ()
+	{
+		int _timeStart = 150000;
+		_timeStart -= (int)SwinGame.TimerTicks (TIMER);
+		_timeStart /= 1000;
+
+		if (_timeStart < 0) {
+			_timeStart = 0;
+			SwitchState (GameState.EndingGame);
+		}
+
+		int mins;
+		int secs;
+
+		mins = _timeStart / 60;
+		secs = _timeStart - (mins * 60);
+
+		string _timeLeft;
+
+		if (secs < 10) {
+			_timeLeft = mins + ":0" + secs;
+		} else {
+			_timeLeft = mins + ":" + secs;
+		}
+
+		return _timeLeft;
 	}
 
 	/// <summary>
