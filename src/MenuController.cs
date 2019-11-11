@@ -35,6 +35,7 @@ static class MenuController
 			"DIFFICULTY",
 			"SCORES",
 			"MUTE",
+			"OPTION",
 			"QUIT"
 		},
 		new string[] {
@@ -51,6 +52,11 @@ static class MenuController
 			"BACK"
 		},
 
+		new string[]{
+			"FULLSCREEN",
+			"BORDERLESS"
+		}
+
 	};
 
 	private const int MAIN_MENU = 0;
@@ -58,12 +64,14 @@ static class MenuController
 	private const int SETUP_MENU = 2;
 	private const int BACK_MENU = 3;
 	private const int MUTE_MENU = 4;
+	private const int OPTION_MENU = 5;
 
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
 	private const int MAIN_MENU_MUTE_BUTTON = 3;
-	private const int MAIN_MENU_QUIT_BUTTON = 4;
+	private const int MAIN_MENU_OPTION_BUTTON = 4;
+	private const int MAIN_MENU_QUIT_BUTTON = 5;
 
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
@@ -73,6 +81,9 @@ static class MenuController
 	private const int GAME_MENU_RETURN_BUTTON = 0;
 	private const int GAME_MENU_SURRENDER_BUTTON = 1;
 	private const int GAME_MENU_QUIT_BUTTON = 2;
+
+	private const int OPTION_MENU_FULLSCREEN_BUTTON = 0;
+	private const int OPTION_MENU_BORDERLESS_BUTTON = 1;
 
 	private static readonly Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
 
@@ -95,6 +106,16 @@ static class MenuController
 
 		if (!handled) {
 			HandleMenuInput(MAIN_MENU, 0, 0);
+		}
+	}
+
+	public static void HandleOptionMenuInput ()
+	{
+		bool handled = false;
+		handled = HandleMenuInput (OPTION_MENU, 1, 3);
+
+		if (!handled) {
+			HandleMenuInput (MAIN_MENU, 0, 0);
 		}
 	}
 
@@ -169,6 +190,12 @@ static class MenuController
 		//SwinGame.DrawText("Paused", Color.White, GameFont("ArialLarge"), 50, 50)
 
 		DrawButtons(GAME_MENU);
+	}
+
+	public static void DrawOption ()
+	{
+		DrawButtons (MAIN_MENU);
+		DrawButtons (OPTION_MENU, 1, 3);
 	}
 
 	/// <summary>
@@ -304,6 +331,9 @@ static class MenuController
 			case MUTE_MENU:
 				GameResources.MuteButtonPressed ();
 				break;
+			case OPTION_MENU:
+				PerformOptionMenuAction (button);
+				break;
 			case BACK_MENU:
 				PerformBackMenuAction (button);
 				break;
@@ -332,6 +362,9 @@ static class MenuController
 			case MAIN_MENU_MUTE_BUTTON:
 				GameResources.MuteButtonPressed ();
 				break;
+			case MAIN_MENU_OPTION_BUTTON:
+				GameController.AddNewState (GameState.AlteringOption);
+				break;
 			case MAIN_MENU_QUIT_BUTTON:
 				GameController.EndCurrentState();
 				break;
@@ -357,6 +390,19 @@ static class MenuController
 		}
 		//Always end state - handles exit button as well
 		GameController.EndCurrentState();
+	}
+
+	private static void PerformOptionMenuAction (int button)
+	{
+		switch (button) {
+		case OPTION_MENU_FULLSCREEN_BUTTON:
+			SwinGame.ToggleFullScreen ();
+			break;
+		case OPTION_MENU_BORDERLESS_BUTTON:
+			SwinGame.ToggleWindowBorder ();
+			break;
+		}
+		GameController.EndCurrentState ();
 	}
 
 	/// <summary>
