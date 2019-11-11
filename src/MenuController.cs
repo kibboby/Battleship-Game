@@ -29,7 +29,7 @@ static class MenuController
 	/// <remarks>
 	/// These are the text captions for the menu items.
 	/// </remarks>
-	private static readonly string[][] _menuStructure = {
+	private static readonly string [] [] _menuStructure = {
 		new string[] {
 			"PLAY",
 			"DIFFICULTY",
