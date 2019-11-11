@@ -33,6 +33,9 @@ public enum GameState
 	/// </summary>
 	AlteringSettings,
 
+	/// <summary>
+	/// The player is altering the game of options (fullscreen and window borderless)
+	/// </summary>
 	AlteringOption,
 
 	/// <summary>

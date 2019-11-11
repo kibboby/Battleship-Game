@@ -48,14 +48,20 @@ static class MenuController
 			"MEDIUM",
 			"HARD"
 		},
+
 		new string[] {
 			"BACK"
+		},
+
+		new string[] {
+			"MUTE",
+			"UNMUTE"
 		},
 
 		new string[]{
 			"FULLSCREEN",
 			"BORDERLESS"
-		}
+		},
 
 	};
 
