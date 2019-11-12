@@ -43,7 +43,7 @@ public static class GameResources
 	{
 		//Backgrounds
 		NewImage("Menu", "main_page.jpg");
-		NewImage("Discovery", "discover.jpg");
+		NewImage("Discovery", "discover.jpeg");
 		NewImage("Deploy", "deploy.jpg");
 		
 		//New Background
