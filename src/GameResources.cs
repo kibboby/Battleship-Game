@@ -35,7 +35,8 @@ public static class GameResources
 		NewFont("Courier", "cour.ttf", 14);
 		NewFont("CourierSmall", "cour.ttf", 8);
 		NewFont("Menu", "ffaccess.ttf", 8);
-		NewFont ("Timer", "ffaccess.ttf", 8);
+		NewFont ("Game", "maven_pro_regular.ttf", 14);
+		NewFont ("Timer", "maven_pro_regular.ttf", 14);
 	}
 
 	private static void LoadImages()
@@ -47,6 +48,7 @@ public static class GameResources
 		
 		//New Background
 		NewImage ("a1", "a1.jpg");
+		NewImage ("a2", "a2.jpg");
 
 		//Deployment
 		NewImage("LeftRightButton", "deploy_dir_button_horiz.png");
