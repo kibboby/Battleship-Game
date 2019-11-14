@@ -311,6 +311,9 @@ public static class GameController
 			case GameState.AlteringOption:
 				MenuController.HandleOptionMenuInput ();
 				break;
+			case GameState.ViewHowToPlay:
+				Instruction.ExitInstruction ();
+				break;
 		}
 
 		UtilityFunctions.UpdateAnimations();
@@ -356,6 +359,9 @@ public static class GameController
 			case GameState.AlteringOption:
 				SwinGame.StopTimer (TIMER);
 				MenuController.DrawOption ();
+				break;
+			case GameState.ViewHowToPlay:
+				Instruction.WriteInstruction ();
 				break;
 		}
 

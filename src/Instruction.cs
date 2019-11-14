@@ -23,18 +23,22 @@ public class Instruction
 
 	public static void WriteInstruction ()
 	{
-		SwinGame.DrawText ("HOW TO PLAY BATTLESHIP GAME",Color.Aqua,GameResources.GameFont("Courier"),LEFT,20);
-		SwinGame.DrawText ("Player will take turn to fire shots on opponent's battleship board", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 50);
-		SwinGame.DrawText ("Upon player's turn, click on a tile on the opponent's board to hit the opponent's ship", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 90);
-		SwinGame.DrawText ("If the player manage to hit a tile which contains a ship, the tile will turn into red coloured background", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 120);
-		SwinGame.DrawText ("If the tile is empty, the tile will turn into blue colored background", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 150);
-		SwinGame.DrawText ("The player will get another chance to hit the opponent's board if ", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 190);
-		SwinGame.DrawText ("player manage to hit the tile that contains a ship",Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 230);
-		SwinGame.DrawText ("Otherwise, the other player will have their turn to hit the opponent's board.", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 260);
-		SwinGame.DrawText ("The game consist 5 ships with different sizes.", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 300);
-		SwinGame.DrawText ("Therefore, the player who hit all the 5 five ships first wins", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 340);
-		SwinGame.DrawText ("Each round of the game is only limited to 2 minutes and 30 seconds", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 380);
-		SwinGame.DrawText ("Player need to finish the game in the timegiven,or else the player will lose in the game", Color.Aqua, GameResources.GameFont ("Courier"), LEFT, 430);
+		SwinGame.DrawText ("HOW TO PLAY BATTLESHIP GAME",Color.Black,GameResources.GameFont("Arial"),LEFT,20);
+		SwinGame.DrawText ("-----------------------------------------------------------------------------------------------------------",Color.White,GameResources.GameFont("Arial"),0,40);
+		SwinGame.DrawText (">>Player will take turn to fire shots on opponent's battleship board", Color.Black, GameResources.GameFont ("Game"), LEFT, 90);
+		SwinGame.DrawText (">>Upon player's turn, click on a tile on the opponent's board to hit the opponent's ship", Color.Black, GameResources.GameFont ("Game"), LEFT, 120);
+		SwinGame.DrawText (">>If the player manage to hit a tile which contains a ship,", Color.Black, GameResources.GameFont ("Game"), LEFT, 150);
+		SwinGame.DrawText ("  the tile will turn into red coloured background",Color.Black, GameResources.GameFont ("Game"), LEFT, 170);
+		SwinGame.DrawText (">>If the tile is empty, the tile will turn into blue colored background", Color.Black, GameResources.GameFont ("Game"), LEFT, 200);
+		SwinGame.DrawText (">>The player will get another chance to hit the opponent's board if ", Color.Black, GameResources.GameFont ("Game"), LEFT, 230);
+		SwinGame.DrawText ("  player manage to hit the tile that contains a ship",Color.Black, GameResources.GameFont ("Game"), LEFT, 250);
+		SwinGame.DrawText (">>Otherwise, the other player will have their turn to hit the opponent's board.", Color.Black, GameResources.GameFont ("Game"), LEFT, 280);
+		SwinGame.DrawText (">>The game consist 5 ships with different sizes.", Color.Black, GameResources.GameFont ("Game"), LEFT, 310);
+		SwinGame.DrawText (">>Therefore, the player who hit all the 5 five ships first wins", Color.Black, GameResources.GameFont ("Game"), LEFT, 340);
+		SwinGame.DrawText (">>Each round of the game is only limited to 2 minutes and 30 seconds", Color.Black, GameResources.GameFont ("Game"), LEFT, 370);
+		SwinGame.DrawText (">>Player need to finish the game in the timegiven,or else the player will lose in the game", Color.Black, GameResources.GameFont ("Game"), LEFT, 400);
+		SwinGame.DrawText ("-----------------------------------------------------------------------------------------------------------", Color.White, GameResources.GameFont ("Arial"), 0, 410);
+		SwinGame.DrawText ("Press 'Esc' or 'Space' or 'Left Mouse Key' to exit the page", Color.Black,GameResources.GameFont("Game"),LEFT+80, 450);
 	}
 
 	public static void ViewInstruction ()

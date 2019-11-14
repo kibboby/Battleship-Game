@@ -37,6 +37,9 @@ public static class GameResources
 		NewFont("Menu", "ffaccess.ttf", 8);
 		NewFont ("Game", "maven_pro_regular.ttf", 14);
 		NewFont ("Timer", "maven_pro_regular.ttf", 14);
+
+		//new fony
+		NewFont ("Arial", "arial.ttf", 30);
 	}
 
 	private static void LoadImages()
