@@ -23,6 +23,11 @@ public enum GameState
 	/// </summary>
 	ViewingGameMenu,
 
+	///<summary>
+	/// The player is viewing the how to play page
+	/// </summary>
+	ViewHowToPlay,
+
 	/// <summary>
 	/// The player is looking at the high scores
 	/// </summary>

@@ -49,6 +49,7 @@ public static class GameResources
 		//New Background
 		NewImage ("a1", "a1.jpg");
 		NewImage ("a2", "a2.jpg");
+		NewImage ("a3", "a3.jpg");
 
 		//Deployment
 		NewImage("LeftRightButton", "deploy_dir_button_horiz.png");

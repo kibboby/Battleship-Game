@@ -32,6 +32,7 @@ static class MenuController
 	private static readonly string [] [] _menuStructure = {
 		new string[] {
 			"PLAY",
+			"HOW TO PLAY",
 			"DIFFICULTY",
 			"SCORES",
 			"MUTE",
@@ -73,11 +74,12 @@ static class MenuController
 	private const int OPTION_MENU = 5;
 
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
-	private const int MAIN_MENU_SETUP_BUTTON = 1;
-	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
-	private const int MAIN_MENU_MUTE_BUTTON = 3;
-	private const int MAIN_MENU_OPTION_BUTTON = 4;
-	private const int MAIN_MENU_QUIT_BUTTON = 5;
+	private const int MAIN_MENU_HOWTOPLAY_BUTTON = 1;
+	private const int MAIN_MENU_SETUP_BUTTON = 2;
+	private const int MAIN_MENU_TOP_SCORES_BUTTON = 3;
+	private const int MAIN_MENU_MUTE_BUTTON = 4;
+	private const int MAIN_MENU_OPTION_BUTTON = 5;
+	private const int MAIN_MENU_QUIT_BUTTON = 6;
 
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
@@ -193,7 +195,7 @@ static class MenuController
 	public static void DrawGameMenu()
 	{
 		//Clears the Screen to Black
-		//SwinGame.DrawText("Paused", Color.White, GameFont("ArialLarge"), 50, 50)
+		SwinGame.DrawText ("Paused", Color.White, GameResources.GameFont ("ArialLarge"), 50, 50);
 
 		DrawButtons(GAME_MENU);
 	}
@@ -270,7 +272,7 @@ static class MenuController
 			int h = BUTTON_HEIGHT;
 
 			if (GameResources.Muted && a == MAIN_MENU_MUTE_BUTTON) {
-				btnText = "UNMUTED";
+				btnText = "UNMUTE";
 			}
 
 			if (IsMouseOverMenu (a, level, xOffset)) {
@@ -358,6 +360,9 @@ static class MenuController
 		switch (button) {
 			case MAIN_MENU_PLAY_BUTTON:
 				GameController.StartGame();
+				break;
+			case MAIN_MENU_HOWTOPLAY_BUTTON:
+				GameController.AddNewState (GameState.ViewHowToPlay);
 				break;
 			case MAIN_MENU_SETUP_BUTTON:
 				GameController.AddNewState(GameState.AlteringSettings);
