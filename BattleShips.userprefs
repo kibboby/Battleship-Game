@@ -6,9 +6,10 @@
       <Breakpoint file="C:\Users\Song\Desktop\Week5\src\DeploymentController.cs" line="68" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\GameResources.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Model\Instruction.cs">
     <Files>
-      <File FileName="src\GameResources.cs" Line="46" Column="18" />
+      <File FileName="src\GameResources.cs" Line="80" Column="24" />
+      <File FileName="src\Model\Instruction.cs" Line="42" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.BattleShips PreferredExecutionTarget="MonoDevelop.Default" />
