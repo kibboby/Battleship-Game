@@ -63,30 +63,35 @@ static class HighScoreController
 	private static void LoadScores()
 	{
 		string filename = null;
-		filename = SwinGame.PathToResource("highscores.txt");
 
-		StreamReader input = default(StreamReader);
-		input = new StreamReader(filename);
+		if (SwinGame.ButtonClicked ("RESET"))
+			filename = SwinGame.PathToResource ("new_highscores.txt");
+		else
+			filename = SwinGame.PathToResource ("highscore.txt");
+
+		StreamReader input = default (StreamReader);
+		input = new StreamReader (filename);
 
 		//Read in the # of scores
 		int numScores = 0;
-		numScores = Convert.ToInt32(input.ReadLine());
+		numScores = Convert.ToInt32 (input.ReadLine ());
 
-		_Scores.Clear();
+		_Scores.Clear ();
 
 		int i = 0;
 
 		for (i = 1; i <= numScores; i++) {
-			Score s = default(Score);
+			Score s = default (Score);
 			string line = null;
 
-			line = input.ReadLine();
+			line = input.ReadLine ();
 
-			s.Name = line.Substring(0, NAME_WIDTH);
-			s.Value = Convert.ToInt32(line.Substring(NAME_WIDTH));
-			_Scores.Add(s);
+			s.Name = line.Substring (0, NAME_WIDTH);
+			s.Value = Convert.ToInt32 (line.Substring (NAME_WIDTH));
+			_Scores.Add (s);
 		}
 		input.Close();
+
 	}
 
 	/// <summary>
@@ -102,19 +107,25 @@ static class HighScoreController
 	private static void SaveScores()
 	{
 		string filename = null;
-		filename = SwinGame.PathToResource("highscores.txt");
 
-		StreamWriter output = default(StreamWriter);
-		output = new StreamWriter(filename);
+		if (SwinGame.ButtonClicked ("RESET"))
+			filename = SwinGame.PathToResource ("new_highscores.txt");
+		else
+			filename = SwinGame.PathToResource ("highscore.txt");
 
-		output.WriteLine(_Scores.Count);
+		StreamWriter output = default (StreamWriter);
+		output = new StreamWriter (filename);
+
+		output.WriteLine (_Scores.Count);
 
 		foreach (Score s in _Scores) {
-			output.WriteLine(s.Name + s.Value);
+			output.WriteLine (s.Name + s.Value);
 		}
 
-		output.Close();
+		output.Close ();
+		
 	}
+
 
 	/// <summary>
 	/// Draws the high scores to the screen.
@@ -146,12 +157,21 @@ static class HighScoreController
 		}
 	}
 
+
 	/// <summary>
 	/// Handles the user input during the top score screen.
 	/// </summary>
 	/// <remarks></remarks>
 	public static void HandleHighScoreInput()
 	{
+
+		if (SwinGame.ButtonClicked ("RESET"))
+		{
+			LoadScores ();
+			MenuController.HandleResetMenuInput ();
+		}
+
+
 		if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.vk_ESCAPE) || SwinGame.KeyTyped(KeyCode.vk_RETURN)) {
 			GameController.EndCurrentState();
 		}

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using System.Data;
 using System.Diagnostics;
+using System.IO;
 using SwinGameSDK;
 
 /// <summary>
@@ -63,6 +64,9 @@ static class MenuController
 			"MUTE",
 			"UNMUTE"
 		},
+		new string[] {
+			"RESET"
+		},
 
 
 	};
@@ -73,6 +77,7 @@ static class MenuController
 	private const int BACK_MENU = 3;
 	private const int OPTION_MENU = 4;
 	private const int MUTE_MENU = 5;
+	private const int RESET_MENU = 6;
 
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_HOWTOPLAY_BUTTON = 1;
@@ -98,7 +103,7 @@ static class MenuController
 
 	private static readonly Color HIGHLIGHT_COLOR = SwinGame.RGBAColor(1, 57, 86, 255);
 	/// <summary>
-	/// Handles the processing of user input when the main menu is showing
+	/// Handles the processing of user input when the main menu is showing.
 	/// </summary>
 	public static void HandleMainMenuInput()
 	{
@@ -106,7 +111,7 @@ static class MenuController
 	}
 
 	/// <summary>
-	/// Handles the processing of user input when the main menu is showing
+	/// Handles the processing of user input when the main menu is showing.
 	/// </summary>
 	public static void HandleSetupMenuInput()
 	{
@@ -118,6 +123,9 @@ static class MenuController
 		}
 	}
 
+	/// <summary>
+	/// Handles the processing of user input when the main menu is showing.
+	/// </summary>
 	public static void HandleOptionMenuInput ()
 	{
 		bool handled = false;
@@ -139,12 +147,18 @@ static class MenuController
 		HandleMenuInput(GAME_MENU, 0, 0);
 	}
 
+	/// <summary>
+	/// Handles the input for back button.
+	/// </summary>
 	public static void HandleBackMenuInput ()
 	{
 		HandleMenuInput (BACK_MENU, 0, 0);
 	}
 
-
+	public static void HandleResetMenuInput ()
+	{
+		HandleMenuInput (RESET_MENU, 0, 0);
+	}
 
 	/// <summary>
 	/// Handles input for the specified menu.
@@ -201,6 +215,9 @@ static class MenuController
 		DrawButtons(GAME_MENU);
 	}
 
+	/// <summary>
+	/// Draws the Option menu to the screen.
+	/// </summary>
 	public static void DrawOption ()
 	{
 		DrawButtons (MAIN_MENU);
@@ -222,9 +239,20 @@ static class MenuController
 		DrawButtons(SETUP_MENU, 1, 1);
 	}
 
+	/// <summary>
+	/// Draws the back button.
+	/// </summary>
 	public static void DrawBackMenuButton ()
 	{
 		DrawButtons (BACK_MENU);
+	}
+
+	/// <summary>
+	/// Draws the reset button.
+	/// </summary>
+	public static void DrawResetMenuButton ()
+	{
+		DrawButtons (RESET_MENU);
 	}
 
 	/// <summary>
@@ -346,6 +374,9 @@ static class MenuController
 			case BACK_MENU:
 				PerformBackMenuAction (button);
 				break;
+			case RESET_MENU:
+				PerformResetMenuAction (button);
+				break;
 
 		}
 	}
@@ -404,6 +435,10 @@ static class MenuController
 		GameController.EndCurrentState();
 	}
 
+	/// <summary>
+	/// The option menu was clicked, perform the button's action.
+	/// </summary>
+	/// <param name="button">Button.</param>
 	private static void PerformOptionMenuAction (int button)
 	{
 		switch (button) {
@@ -439,10 +474,21 @@ static class MenuController
 		}
 	}
 
-	//handle user input to go to the main page
+	/// <summary>
+	/// The back menu was clicked, perform the button's action.
+	/// </summary>
+	/// <param name="button">Button.</param>
 	public static void PerformBackMenuAction (int button)
 	{
 		GameController.EndCurrentState ();
+	}
+
+	public static void PerformResetMenuAction (int button)
+	{
+		string filename = null;
+		filename = SwinGame.PathToResource ("highscores.txt");
+		File.WriteAllText (filename, string.Empty);
+
 	}
 }
 

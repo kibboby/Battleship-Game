@@ -355,6 +355,7 @@ public static class GameController
 				break;
 			case GameState.ViewingHighScores:
 				HighScoreController.DrawHighScores();
+				MenuController.DrawResetMenuButton ();
 				break;
 			case GameState.AlteringOption:
 				SwinGame.StopTimer (TIMER);
