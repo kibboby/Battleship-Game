@@ -35,8 +35,8 @@ static class MenuController
 			"HOW TO PLAY",
 			"DIFFICULTY",
 			"SCORES",
-			"MUTE",
 			"OPTION",
+			"MUTE",
 			"QUIT"
 		},
 		new string[] {
@@ -54,15 +54,16 @@ static class MenuController
 			"BACK"
 		},
 
+		new string[]{
+			"FULLSCREEN",
+			"BORDERLESS"
+		},
+
 		new string[] {
 			"MUTE",
 			"UNMUTE"
 		},
 
-		new string[]{
-			"FULLSCREEN",
-			"BORDERLESS"
-		},
 
 	};
 
@@ -70,15 +71,15 @@ static class MenuController
 	private const int GAME_MENU = 1;
 	private const int SETUP_MENU = 2;
 	private const int BACK_MENU = 3;
-	private const int MUTE_MENU = 4;
-	private const int OPTION_MENU = 5;
+	private const int OPTION_MENU = 4;
+	private const int MUTE_MENU = 5;
 
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_HOWTOPLAY_BUTTON = 1;
 	private const int MAIN_MENU_SETUP_BUTTON = 2;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 3;
-	private const int MAIN_MENU_MUTE_BUTTON = 4;
-	private const int MAIN_MENU_OPTION_BUTTON = 5;
+	private const int MAIN_MENU_OPTION_BUTTON = 4;
+	private const int MAIN_MENU_MUTE_BUTTON = 5;
 	private const int MAIN_MENU_QUIT_BUTTON = 6;
 
 	private const int SETUP_MENU_EASY_BUTTON = 0;
