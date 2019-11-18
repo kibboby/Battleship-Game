@@ -64,11 +64,8 @@ static class HighScoreController
 	{
 		string filename = null;
 
-		if (SwinGame.ButtonClicked ("RESET"))
-			filename = SwinGame.PathToResource ("new_highscores.txt");
-		else
-			filename = SwinGame.PathToResource ("highscore.txt");
-
+		filename = SwinGame.PathToResource ("highscores.txt");
+		    
 		StreamReader input = default (StreamReader);
 		input = new StreamReader (filename);
 
@@ -108,10 +105,7 @@ static class HighScoreController
 	{
 		string filename = null;
 
-		if (SwinGame.ButtonClicked ("RESET"))
-			filename = SwinGame.PathToResource ("new_highscores.txt");
-		else
-			filename = SwinGame.PathToResource ("highscore.txt");
+		filename = SwinGame.PathToResource ("highscores.txt");
 
 		StreamWriter output = default (StreamWriter);
 		output = new StreamWriter (filename);
@@ -167,8 +161,9 @@ static class HighScoreController
 
 		if (SwinGame.ButtonClicked ("RESET"))
 		{
-			LoadScores ();
 			MenuController.HandleResetMenuInput ();
+			LoadScores ();
+			SaveScores ();
 		}
 
 

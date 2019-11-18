@@ -483,12 +483,26 @@ static class MenuController
 		GameController.EndCurrentState ();
 	}
 
+	/// <summary>
+	/// The reset menu was clicked, perform the button's action.
+	/// </summary>
+	/// <param name="button">Button.</param>
 	public static void PerformResetMenuAction (int button)
 	{
 		string filename = null;
 		filename = SwinGame.PathToResource ("highscores.txt");
 		File.WriteAllText (filename, string.Empty);
-
+		File.AppendAllText (filename, "10"+Environment.NewLine);
+		File.AppendAllText (filename, "AAA0" + Environment.NewLine);
+		File.AppendAllText (filename, "BBB0" + Environment.NewLine);
+		File.AppendAllText (filename, "CCC0" + Environment.NewLine);
+		File.AppendAllText (filename, "DDD0" + Environment.NewLine);
+		File.AppendAllText (filename, "EEE0" + Environment.NewLine);
+		File.AppendAllText (filename, "FFF0" + Environment.NewLine);
+		File.AppendAllText (filename, "GGG0" + Environment.NewLine);
+		File.AppendAllText (filename, "HHH0" + Environment.NewLine);
+		File.AppendAllText (filename, "III0" + Environment.NewLine);
+		File.AppendAllText (filename, "JJJ0" + Environment.NewLine);
 	}
 }
 
