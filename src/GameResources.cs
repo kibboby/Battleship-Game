@@ -34,7 +34,7 @@ public static class GameResources
 		NewFont("ArialLarge", "arial.ttf", 80);
 		NewFont("Courier", "cour.ttf", 14);
 		NewFont("CourierSmall", "cour.ttf", 8);
-		NewFont("Menu", "maven_pro_regular.ttf", 13);
+		NewFont("Menu", "maven_pro_regular.ttf", 16);
 		NewFont ("Game", "maven_pro_regular.ttf", 14);
 		NewFont ("Timer", "maven_pro_regular.ttf", 14);
 
