@@ -155,6 +155,9 @@ static class MenuController
 		HandleMenuInput (BACK_MENU, 0, 0);
 	}
 
+	/// <summary>
+	/// Handles the input for reset menu.
+	/// </summary>
 	public static void HandleResetMenuInput ()
 	{
 		HandleMenuInput (RESET_MENU, 0, 0);
