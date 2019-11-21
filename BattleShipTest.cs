@@ -20,5 +20,14 @@ namespace BattleShips
 
 			Assert.AreEqual (choose, selectedBS);
 		}
+
+		[Test ()]
+		public void TestBattleShipPlacement ()
+		{
+			Ship ship = new Ship (ShipName.Tug);
+			ship.Deployed (Direction.UpDown, 5, 5);
+
+			Assert.IsTrue (ship.Column == 5);
+		}
 	}
 }
